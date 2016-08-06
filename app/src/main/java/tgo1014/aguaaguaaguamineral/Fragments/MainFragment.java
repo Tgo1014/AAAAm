@@ -151,6 +151,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
             txtRepetir.setEnabled(status);
             txtMinutos.setEnabled(status);
             btnConfirmar.setEnabled(status);
+            linearLayoutFinal.setEnabled(status);
+            linearLayoutInicial.setEnabled(status);
     }
 
     public void showTimePicker(final int id, int hora, int minuto, boolean is24HourViews) {
