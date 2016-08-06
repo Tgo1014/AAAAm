@@ -1,6 +1,7 @@
 package tgo1014.aguaaguaaguamineral.Fragments;
 
 import android.app.TimePickerDialog;
+import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.pixplicity.easyprefs.library.Prefs;
+
+import java.text.ParseException;
+import java.util.Date;
 
 import tgo1014.aguaaguaaguamineral.R;
 import tgo1014.aguaaguaaguamineral.Utils.Alarme;
@@ -85,14 +89,32 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnConfirmar:
+                //intervalo de repetição do aviso
+                int intervalo = Integer.parseInt(editMinutos.getText().toString());
+                //Horarios
+                Date horarioInicial = null;
+                Date horarioFinal = null;
 
-                //Verifica se o valor digitado é um número
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+                try {
+                    horarioInicial = sdf.parse(txtHorarioInicial.getText().toString());
+                    horarioFinal = sdf.parse(txtHorarioFinal.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 try{
-                    int intervalo = Integer.parseInt(editMinutos.getText().toString());
-                    if (intervalo > 0){
-                        alarme.inicia(getContext(), intervalo);
-                        Prefs.putString("editMinutos", String.valueOf(intervalo));
-                        Utils.toastRapido(view.getContext(), "Agora você tá legal a cada " + intervalo + " minutos!");
+                    //Verifica se o hoário incial é depois do horário final
+                    if (horarioInicial != null && horarioInicial.before(horarioFinal)){
+                        //Verifica se o intervalo digitado entre os lembretes é um número
+                        if (intervalo > 0){
+                            alarme.inicia(getContext(), intervalo);
+                            Prefs.putString("editMinutos", String.valueOf(intervalo));
+                            Utils.toastRapido(view.getContext(), "Agora você tá legal a cada " + intervalo + " minutos!");
+                        }
+                    }  else {
+                        Utils.toastRapido(getContext(), "Horario inicial depois do horário final");
                     }
                 }catch (Exception e){
                     Utils.toastRapido(view.getContext(), "Intervalo inválido!");
