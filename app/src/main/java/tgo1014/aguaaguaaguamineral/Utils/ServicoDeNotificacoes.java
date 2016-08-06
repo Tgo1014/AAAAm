@@ -3,10 +3,11 @@ package tgo1014.aguaaguaaguamineral.Utils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.util.Log;
 
 import com.pixplicity.easyprefs.library.Prefs;
+
+import java.util.Calendar;
 
 public class ServicoDeNotificacoes extends BroadcastReceiver {
 
