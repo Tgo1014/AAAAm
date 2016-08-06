@@ -35,4 +35,8 @@ public class Utils {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }
 
+    public static String arrumarHora(String s){
+        return (String.valueOf(s).length() < 2) ? '0' + String.valueOf(s) : String.valueOf(s);
+    }
+
 }

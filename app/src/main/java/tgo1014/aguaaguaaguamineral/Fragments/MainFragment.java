@@ -159,8 +159,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hora, int minuto) {
 
-                        String hr = (String.valueOf(hora).length() < 2) ? '0' + String.valueOf(hora) : String.valueOf(hora);
-                        String min = (String.valueOf(minuto).length() < 2) ? '0' + String.valueOf(minuto) : String.valueOf(minuto);
+                        String hr = Utils.arrumarHora(String.valueOf(hora));
+                        String min = Utils.arrumarHora(String.valueOf(minuto));
                         String horario = hr + ":" + min;
 
                         if (id == HORA_INICIAL_ID){
