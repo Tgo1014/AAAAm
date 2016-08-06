@@ -1,7 +1,6 @@
 package tgo1014.aguaaguaaguamineral.Fragments;
 
 import android.app.TimePickerDialog;
-import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +17,7 @@ import android.widget.TimePicker;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import tgo1014.aguaaguaaguamineral.R;
@@ -119,8 +119,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
                 }catch (Exception e){
                     Utils.toastRapido(view.getContext(), "Intervalo inválido!");
                 }
-
                 break;
+
             case R.id.LinearHoraInicial:
                 showTimePicker(HORA_INICIAL_ID, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
                 break;
