@@ -16,6 +16,10 @@ import android.widget.TimePicker;
 
 import com.pixplicity.easyprefs.library.Prefs;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import tgo1014.aguaaguaaguamineral.R;
 import tgo1014.aguaaguaaguamineral.Utils.Alarme;
 import tgo1014.aguaaguaaguamineral.Utils.Utils;
@@ -85,20 +89,38 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnConfirmar:
+                //intervalo de repetição do aviso
+                int intervalo = Integer.parseInt(editMinutos.getText().toString());
+                //Horarios
+                Date horarioInicial = null;
+                Date horarioFinal = null;
 
-                //Verifica se o valor digitado é um número
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+                try {
+                    horarioInicial = sdf.parse(txtHorarioInicial.getText().toString());
+                    horarioFinal = sdf.parse(txtHorarioFinal.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 try{
-                    int intervalo = Integer.parseInt(editMinutos.getText().toString());
-                    if (intervalo > 0){
-                        alarme.inicia(getContext(), intervalo);
-                        Prefs.putString("editMinutos", String.valueOf(intervalo));
-                        Utils.toastRapido(view.getContext(), "Agora você tá legal a cada " + intervalo + " minutos!");
+                    //Verifica se o hoário incial é depois do horário final
+                    if (horarioInicial != null && horarioInicial.before(horarioFinal)){
+                        //Verifica se o intervalo digitado entre os lembretes é um número
+                        if (intervalo > 0){
+                            alarme.inicia(getContext(), intervalo);
+                            Prefs.putString("editMinutos", String.valueOf(intervalo));
+                            Utils.toastRapido(view.getContext(), "Agora você tá legal a cada " + intervalo + " minutos!");
+                        }
+                    }  else {
+                        Utils.toastRapido(getContext(), "Horario inicial depois do horário final");
                     }
                 }catch (Exception e){
                     Utils.toastRapido(view.getContext(), "Intervalo inválido!");
                 }
-
                 break;
+
             case R.id.LinearHoraInicial:
                 showTimePicker(HORA_INICIAL_ID, Calendar.HOUR_OF_DAY, Calendar.MINUTE, true);
                 break;
@@ -129,6 +151,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
             txtRepetir.setEnabled(status);
             txtMinutos.setEnabled(status);
             btnConfirmar.setEnabled(status);
+            linearLayoutFinal.setEnabled(status);
+            linearLayoutInicial.setEnabled(status);
     }
 
     public void showTimePicker(final int id, int hora, int minuto, boolean is24HourViews) {
@@ -137,8 +161,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hora, int minuto) {
 
-                        String hr = (String.valueOf(hora).length() < 2) ? '0' + String.valueOf(hora) : String.valueOf(hora);
-                        String min = (String.valueOf(minuto).length() < 2) ? '0' + String.valueOf(minuto) : String.valueOf(minuto);
+                        String hr = Utils.arrumarHora(String.valueOf(hora));
+                        String min = Utils.arrumarHora(String.valueOf(minuto));
                         String horario = hr + ":" + min;
 
                         if (id == HORA_INICIAL_ID){

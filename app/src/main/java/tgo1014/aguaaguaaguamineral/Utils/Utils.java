@@ -2,7 +2,6 @@ package tgo1014.aguaaguaaguamineral.Utils;
 
 import android.app.Notification;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import br.com.goncalves.pugnotification.notification.PugNotification;
@@ -36,10 +35,8 @@ public class Utils {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }
 
-    public static void GerenciaSharedPref(Context c){
-        SharedPreferences pref = c.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-
+    public static String arrumarHora(String s){
+        return (String.valueOf(s).length() < 2) ? '0' + String.valueOf(s) : String.valueOf(s);
     }
-
 
 }
