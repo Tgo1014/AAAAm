@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context="tgo1014.aguaaguaaguamineral.Fragments.MainFragment">
 
 
     <LinearLayout
+        android:id="@+id/linarLayout_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical">
 
         <TextView
@@ -30,82 +32,101 @@
 
 
     <LinearLayout
-        android:id="@+id/LinearHoraInicial"
+        android:id="@+id/linearLayout_Opcoes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#b2dfdb"
-        android:clickable="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
-        <TextView
-            android:id="@+id/txtHoraInicial"
+        <LinearLayout
+            android:id="@+id/LinearHoraInicial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtHoraInicial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:text="@string/strHoraInicial"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/txtHorarioInicial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white"
+                tools:text="00:00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearHoraFinal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:clickable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtHoraFinal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strHoraFinal"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/txtHorarioFinal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white"
+                tools:text="00:00" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtRepetir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/strRepetir" />
+
+            <EditText
+                android:id="@+id/editMinutos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:singleLine="true"
+                android:text="@string/minutos_padrao" />
+
+            <TextView
+                android:id="@+id/txtMinutos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/strMinutos" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnConfirmar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="@string/strHoraInicial" />
-
-        <TextView
-            android:id="@+id/txtHorarioInicial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:text="@string/btnLembrar" />
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LinearHoraFinal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#4db6ac"
-        android:clickable="true"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtHoraFinal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/strHoraFinal" />
-
-        <TextView
-            android:id="@+id/txtHorarioFinal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtRepetir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/strRepetir" />
-
-        <EditText
-            android:id="@+id/editMinutos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:text="@string/minutos_padrao" />
-
-        <TextView
-            android:id="@+id/txtMinutos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/strMinutos" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnConfirmar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:focusable="true"
-        android:text="@string/btnLembrar" />
 
 </LinearLayout>

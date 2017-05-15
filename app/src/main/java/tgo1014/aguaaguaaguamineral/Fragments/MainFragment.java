@@ -140,16 +140,16 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     public void ativaDesativaElementos(boolean status) {
-        editMinutos.setEnabled(status);
-        txtHoraInicial.setEnabled(status);
-        txtHorarioInicial.setEnabled(status);
-        txtHoraFinal.setEnabled(status);
-        txtHorarioFinal.setEnabled(status);
-        txtRepetir.setEnabled(status);
-        txtMinutos.setEnabled(status);
-        btnConfirmar.setEnabled(status);
-        linearLayoutFinal.setEnabled(status);
-        linearLayoutInicial.setEnabled(status);
+
+        if (getView() != null) {
+            if (status) {
+                getView().findViewById(R.id.linarLayout_switch).getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                (getView().findViewById(R.id.linearLayout_Opcoes)).setVisibility(View.VISIBLE);
+            } else {
+                getView().findViewById(R.id.linarLayout_switch).getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+                (getView().findViewById(R.id.linearLayout_Opcoes)).setVisibility(View.GONE);
+            }
+        }
     }
 
     public void showTimePicker(final int id, int hora, int minuto, boolean is24HourViews) {
@@ -157,7 +157,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hora, int minuto) {
-
                         String hr = Utils.arrumarHora(String.valueOf(hora));
                         String min = Utils.arrumarHora(String.valueOf(minuto));
                         String horario = hr + ":" + min;
