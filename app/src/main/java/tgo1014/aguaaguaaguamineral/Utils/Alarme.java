@@ -9,9 +9,6 @@ import java.util.Calendar;
 
 public class Alarme {
 
-    PendingIntent pendingIntent;
-    AlarmManager alarmManager;
-
     public void inicia (Context c, int intervalo){
 
         //Recebe o contexto da aplicação em execução
@@ -19,14 +16,14 @@ public class Alarme {
 
         //Instancia o intent que será agendado
         Intent alarmIntent = new Intent(context, ServicoDeNotificacoes.class);
-        pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
 
         //Pega o horário atual
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
 
         //Instancia serviço de alarmes
-        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         //Cancela qualquer alarme já existente
         alarmManager.cancel(pendingIntent);

@@ -1,112 +1,111 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
     android:orientation="vertical"
-    tools:context="tgo1014.aguaaguaaguamineral.Fragments.MainFragment"
-    android:id="@+id/fragment_main"
-    android:focusable="true">
+    tools:context="tgo1014.aguaaguaaguamineral.Fragments.MainFragment">
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtFicarLegal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/swtAtivar"
-            android:id="@+id/txtFicarLegal" />
+            android:text="@string/swtAtivar" />
 
         <Switch
+            android:id="@+id/swtGeral"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/swtGeral"
             android:checked="false" />
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/LinearHoraInicial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#b2dfdb"
-        android:id="@+id/LinearHoraInicial"
-        android:clickable="true">
+        android:clickable="true"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/strHoraInicial"
             android:id="@+id/txtHoraInicial"
-            android:enabled="true" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:enabled="true"
+            android:text="@string/strHoraInicial" />
+
+        <TextView
             android:id="@+id/txtHorarioInicial"
-            android:enabled="true" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="true"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/LinearHoraFinal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#4db6ac"
-        android:id="@+id/LinearHoraFinal"
-        android:clickable="true">
+        android:clickable="true"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtHoraFinal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/strHoraFinal"
-            android:id="@+id/txtHoraFinal" />
+            android:text="@string/strHoraFinal" />
 
         <TextView
+            android:id="@+id/txtHorarioFinal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/txtHorarioFinal" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/txtRepetir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/strRepetir"
-            android:id="@+id/txtRepetir"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:text="@string/strRepetir" />
 
         <EditText
+            android:id="@+id/editMinutos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editMinutos"
-            android:text="30"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:text="@string/minutos_padrao" />
 
         <TextView
+            android:id="@+id/txtMinutos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/strMinutos"
-            android:id="@+id/txtMinutos"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:text="@string/strMinutos" />
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnConfirmar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnLembrar"
-        android:id="@+id/btnConfirmar"
         android:layout_gravity="center_horizontal"
-        android:focusable="true" />
-
+        android:focusable="true"
+        android:text="@string/btnLembrar" />
 
 </LinearLayout>

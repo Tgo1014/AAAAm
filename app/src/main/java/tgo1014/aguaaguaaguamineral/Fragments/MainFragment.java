@@ -14,7 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.pixplicity.easyprefs.library.Prefs;
+import com.orhanobut.hawk.Hawk;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,7 +24,7 @@ import tgo1014.aguaaguaaguamineral.R;
 import tgo1014.aguaaguaaguamineral.Utils.Alarme;
 import tgo1014.aguaaguaaguamineral.Utils.Utils;
 
-public class MainFragment extends BaseFragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
+public class MainFragment extends BaseFragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private static final int HORA_INICIAL_ID = 1;
     private static final int HORA_FINAL_ID = 2;
@@ -36,13 +36,13 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
     TextView txtHorarioFinal;
     TextView txtRepetir;
     TextView txtMinutos;
-    Button   btnConfirmar;
-    Switch   swtGeral;
+    Button btnConfirmar;
+    Switch swtGeral;
 
     LinearLayout linearLayoutInicial;
     LinearLayout linearLayoutFinal;
 
-    Alarme   alarme = new Alarme();
+    Alarme alarme = new Alarme();
 
 
     public MainFragment() {
@@ -75,10 +75,10 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
         linearLayoutInicial.setOnClickListener(this);
 
         //Recupera status
-        swtGeral.setChecked(Prefs.getBoolean("swtGeral", false));
-        editMinutos.setText(Prefs.getString("editMinutos", "30"));
-        txtHorarioInicial.setText(Prefs.getString("txtHorarioInicial","00:00"));
-        txtHorarioFinal.setText(Prefs.getString("txtHorarioFinal","00:00"));
+        swtGeral.setChecked(Hawk.get(getString(R.string.pref_status), false));
+        editMinutos.setText(Hawk.get(getString(R.string.pref_minutos), getString(R.string.minutos_padrao)));
+        txtHorarioInicial.setText(Hawk.get(getString(R.string.pref_hora_inicial), getString(R.string.hora_padrao)));
+        txtHorarioFinal.setText(Hawk.get(getString(R.string.pref_hora_final), getString(R.string.hora_padrao)));
 
         ativaDesativaElementos(swtGeral.isChecked());
 
@@ -87,7 +87,9 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+
+        switch (view.getId()) {
+
             case R.id.btnConfirmar:
                 //intervalo de repetição do aviso
                 int intervalo = Integer.parseInt(editMinutos.getText().toString());
@@ -104,19 +106,19 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
                     e.printStackTrace();
                 }
 
-                try{
+                try {
                     //Verifica se o hoário incial é depois do horário final
-                    if (horarioInicial != null && horarioInicial.before(horarioFinal)){
+                    if (horarioInicial != null && horarioInicial.before(horarioFinal)) {
                         //Verifica se o intervalo digitado entre os lembretes é um número
-                        if (intervalo > 0){
+                        if (intervalo > 0) {
                             alarme.inicia(getContext(), intervalo);
-                            Prefs.putString("editMinutos", String.valueOf(intervalo));
+                            Hawk.put(getString(R.string.pref_minutos), String.valueOf(intervalo));
                             Utils.toastRapido(view.getContext(), "Agora você tá legal a cada " + intervalo + " minutos!");
                         }
-                    }  else {
+                    } else {
                         Utils.toastRapido(getContext(), "Horario inicial depois do horário final");
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     Utils.toastRapido(view.getContext(), "Intervalo inválido!");
                 }
                 break;
@@ -135,24 +137,24 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         ativaDesativaElementos(isChecked);
-        Prefs.putBoolean("swtGeral", isChecked);
+        Hawk.put(getString(R.string.pref_status), isChecked);
 
-        if (!isChecked){
+        if (!isChecked) {
             alarme.cancela(getContext());
         }
     }
 
-    public void ativaDesativaElementos(boolean status){
-            editMinutos.setEnabled(status);
-            txtHoraInicial.setEnabled(status);
-            txtHorarioInicial.setEnabled(status);
-            txtHoraFinal.setEnabled(status);
-            txtHorarioFinal.setEnabled(status);
-            txtRepetir.setEnabled(status);
-            txtMinutos.setEnabled(status);
-            btnConfirmar.setEnabled(status);
-            linearLayoutFinal.setEnabled(status);
-            linearLayoutInicial.setEnabled(status);
+    public void ativaDesativaElementos(boolean status) {
+        editMinutos.setEnabled(status);
+        txtHoraInicial.setEnabled(status);
+        txtHorarioInicial.setEnabled(status);
+        txtHoraFinal.setEnabled(status);
+        txtHorarioFinal.setEnabled(status);
+        txtRepetir.setEnabled(status);
+        txtMinutos.setEnabled(status);
+        btnConfirmar.setEnabled(status);
+        linearLayoutFinal.setEnabled(status);
+        linearLayoutInicial.setEnabled(status);
     }
 
     public void showTimePicker(final int id, int hora, int minuto, boolean is24HourViews) {
@@ -165,16 +167,16 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
                         String min = Utils.arrumarHora(String.valueOf(minuto));
                         String horario = hr + ":" + min;
 
-                        if (id == HORA_INICIAL_ID){
+                        if (id == HORA_INICIAL_ID) {
                             txtHorarioInicial.setText(horario);
-                            Prefs.putString("txtHorarioInicial", horario);
+                            Hawk.put(getString(R.string.pref_hora_inicial), horario);
                         }
-                        if (id == HORA_FINAL_ID){
+                        if (id == HORA_FINAL_ID) {
                             txtHorarioFinal.setText(horario);
-                            Prefs.putString("txtHorarioFinal", horario);
+                            Hawk.put(getString(R.string.pref_hora_final), horario);
                         }
                     }
-                }, hora, minuto,is24HourViews);
+                }, hora, minuto, is24HourViews);
         timePickerDialog.show(); //Show the dialog
     }
 

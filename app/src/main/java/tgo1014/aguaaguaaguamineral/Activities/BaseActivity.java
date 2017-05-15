@@ -5,9 +5,10 @@ import android.support.v7.widget.Toolbar;
 
 import tgo1014.aguaaguaaguamineral.R;
 
-public class BaseActivity extends AppCompatActivity{
+public class BaseActivity extends AppCompatActivity {
 
-    protected void configuraToolbar(){
+
+    protected void configuraToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }

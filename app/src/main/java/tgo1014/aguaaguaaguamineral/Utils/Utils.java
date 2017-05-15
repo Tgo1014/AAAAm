@@ -30,7 +30,7 @@ public class Utils {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
-    public static void toastMenosRapido(Context c, String text){
+    public static void toastDevagar(Context c, String text){
         Context context = c.getApplicationContext();
         Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }
