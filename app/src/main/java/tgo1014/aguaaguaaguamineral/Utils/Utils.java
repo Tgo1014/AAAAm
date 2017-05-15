@@ -11,16 +11,14 @@ import tgo1014.aguaaguaaguamineral.R;
 public class Utils {
 
 
-    public static void notificacao(Context c, String titulo, String mensagem){
-
-        Context context = c.getApplicationContext();
+    static void notificacao(Context context, String titulo, String mensagem){
 
         PugNotification.with(context)
                 .load()
                 .title(titulo)
                 .message(mensagem)
-                .smallIcon(R.drawable.pugnotification_ic_launcher)
-                .largeIcon(R.drawable.pugnotification_ic_launcher)
+                .smallIcon(R.drawable.ic_stat_name)
+                .largeIcon(R.drawable.ic_stat_name)
                 .flags(Notification.DEFAULT_ALL)
                 .click(MainActivity.class)
                 .simple()
