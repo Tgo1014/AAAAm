@@ -74,5 +74,11 @@
     <string name="pref_hora_inicial">txtHorarioInicial</string>
     <string name="pref_hora_final">txtHorarioFinal</string>
     <string name="hora_padrao">00:00</string>
+    <string name="aviso_hora_inicial_depois_final">Horario inicial depois do horário final</string>
+    <string name="aviso_intervalo_invalido">Intervalo inválido!</string>
+    <string name="aviso_lembrete_canc">Lembrete cancelado</string>
+    <string name="titulo_notificacao">Bebeu água?! Tá com sede?!</string>
+    <string name="corpo_notificacao">Beba água mineral pra ficar legal!</string>
+    <string name="aviso_ativado">Agora você tá legal a cada %d minutos!</string>
 
 </resources>

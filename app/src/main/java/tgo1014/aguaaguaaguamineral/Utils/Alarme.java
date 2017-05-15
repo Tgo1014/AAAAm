@@ -7,6 +7,8 @@ import android.content.Intent;
 
 import java.util.Calendar;
 
+import tgo1014.aguaaguaaguamineral.R;
+
 public class Alarme {
 
     public void inicia (Context c, int intervalo){
@@ -33,16 +35,15 @@ public class Alarme {
 
     }
 
-    public void cancela(Context c){
+    public void cancela(Context context){
 
-        Intent intent = new Intent(c, ServicoDeNotificacoes.class);
-        PendingIntent sender = PendingIntent.getBroadcast(c, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, ServicoDeNotificacoes.class);
+        PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         alarmManager.cancel(sender);
 
         //Informa cancelamento
-        Utils.toastRapido(c,"Lembrete cancelado");
+        Utils.toastRapido(context,context.getString(R.string.aviso_lembrete_canc));
     }
-
 }

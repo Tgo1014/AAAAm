@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import br.com.goncalves.pugnotification.notification.PugNotification;
+import tgo1014.aguaaguaaguamineral.Activities.MainActivity;
 import tgo1014.aguaaguaaguamineral.R;
 
 public class Utils {
@@ -21,6 +22,7 @@ public class Utils {
                 .smallIcon(R.drawable.pugnotification_ic_launcher)
                 .largeIcon(R.drawable.pugnotification_ic_launcher)
                 .flags(Notification.DEFAULT_ALL)
+                .click(MainActivity.class)
                 .simple()
                 .build();
     }

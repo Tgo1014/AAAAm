@@ -16,7 +16,6 @@ import android.widget.TimePicker;
 
 import com.orhanobut.hawk.Hawk;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -93,33 +92,29 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.btnConfirmar:
                 //intervalo de repetição do aviso
                 int intervalo = Integer.parseInt(editMinutos.getText().toString());
+
                 //Horarios
                 Date horarioInicial = null;
                 Date horarioFinal = null;
-
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
                 try {
                     horarioInicial = sdf.parse(txtHorarioInicial.getText().toString());
                     horarioFinal = sdf.parse(txtHorarioFinal.getText().toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 
-                try {
                     //Verifica se o hoário incial é depois do horário final
                     if (horarioInicial != null && horarioInicial.before(horarioFinal)) {
                         //Verifica se o intervalo digitado entre os lembretes é um número
                         if (intervalo > 0) {
                             alarme.inicia(getContext(), intervalo);
                             Hawk.put(getString(R.string.pref_minutos), String.valueOf(intervalo));
-                            Utils.toastRapido(view.getContext(), "Agora você tá legal a cada " + intervalo + " minutos!");
+                            Utils.toastRapido(view.getContext(), String.format(getString(R.string.aviso_ativado), intervalo));
                         }
                     } else {
-                        Utils.toastRapido(getContext(), "Horario inicial depois do horário final");
+                        Utils.toastRapido(getContext(), getString(R.string.aviso_hora_inicial_depois_final));
                     }
                 } catch (Exception e) {
-                    Utils.toastRapido(view.getContext(), "Intervalo inválido!");
+                    Utils.toastRapido(view.getContext(), getString(R.string.aviso_intervalo_invalido));
                 }
                 break;
 
