@@ -5,10 +5,10 @@
     android:orientation="vertical"
     tools:context="tgo1014.aguaaguaaguamineral.Fragments.HoraFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <TimePicker
+        android:id="@+id/timePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timePicker" />
+        android:headerBackground="@color/colorPrimaryDark"
+        android:numbersSelectorColor="@color/colorPrimary" />
 </LinearLayout>
